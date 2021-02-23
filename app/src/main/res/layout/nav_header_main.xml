@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorPrimary"
-    android:gravity="bottom"
+
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -16,8 +17,12 @@
         android:id="@+id/main_profile_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="3dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:layout_constraintBottom_toTopOf="@+id/main_fullname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile_placeholder" />
 
     <TextView
@@ -26,13 +31,28 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Not Signed In"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/main_email"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
 
         android:id="@+id/main_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Your email"
         android:textColor="#80ffffff"
-        android:text="Your email" />
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/main_profile_add_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/main_profile_image"
+        app:layout_constraintEnd_toEndOf="@+id/main_profile_image"
+        app:srcCompat="@drawable/ic_baseline_add_a_photo_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>
