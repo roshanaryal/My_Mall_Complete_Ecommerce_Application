@@ -8,16 +8,16 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
-import com.roshanaryal.mymall.adapter.CategoryAdapter
-import com.roshanaryal.mymall.adapter.HorizontalProductScrollAdapter
-import com.roshanaryal.mymall.adapter.SliderPagerAdapter
+import com.roshanaryal.mymall.adapter.*
 import com.roshanaryal.mymall.model.CategoryModal
+import com.roshanaryal.mymall.model.HomePageModel
 import com.roshanaryal.mymall.model.HorizontalScrollProductModel
 import com.roshanaryal.mymall.model.SliderModal
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -53,6 +53,14 @@ class HomeFragment : Fragment() {
     private lateinit var horizontalProductScrollAdapter: HorizontalProductScrollAdapter
     private lateinit var horizontalRecyclerView: RecyclerView
     //horizotalscrollview end
+
+    //trendinglayout
+    private lateinit var mutableListGridModel:MutableList< HorizontalScrollProductModel>
+    private lateinit var trendingLayoutGridAdapter: TrendingLayoutGridAdapter
+    private lateinit var gridView: GridView
+    //trendiding layout end
+
+    //
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -180,6 +188,33 @@ class HomeFragment : Fragment() {
         horizontalProductScrollAdapter= HorizontalProductScrollAdapter(mutableListofHorizontalProduct)
         horizontalRecyclerView.adapter=horizontalProductScrollAdapter
         //horizotalscrollview end
+
+
+        //trending layout start
+        gridView=view.findViewById(R.id.trending_layout_gridlayout)
+        mutableListGridModel= mutableListOf()
+        mutableListGridModel.add(HorizontalScrollProductModel(R.drawable.phone_image,"Redmi 5S","SD 25 gb ran","From Rs 25000"))
+        mutableListGridModel.add(HorizontalScrollProductModel(R.drawable.phone_image,"Redmi 5S","SD 25 gb ran","From Rs 25000"))
+        mutableListGridModel.add(HorizontalScrollProductModel(R.drawable.phone_image,"Redmi 5S","SD 25 gb ran","From Rs 25000"))
+        mutableListGridModel.add(HorizontalScrollProductModel(R.drawable.phone_image,"Redmi 5S","SD 25 gb ran","From Rs 25000"))
+        trendingLayoutGridAdapter= context?.let { TrendingLayoutGridAdapter(mutableListGridModel, it) }!!
+        gridView.adapter=trendingLayoutGridAdapter
+
+        //endtrending
+
+        ////////////////////////////////////
+        var recyclerView:RecyclerView=view.findViewById(R.id.testing)
+        recyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        var mutableListOfHomePageModel:MutableList<HomePageModel> = mutableListOf()
+       mutableListOfHomePageModel.add(HomePageModel(0,sliderIconList))
+        mutableListOfHomePageModel.add(HomePageModel(1,R.drawable.stripe_ad,"#000000"))
+        mutableListOfHomePageModel.add(HomePageModel(0,sliderIconList))
+        mutableListOfHomePageModel.add(HomePageModel(1,R.drawable.stripe_ad,"#000000"))
+        mutableListOfHomePageModel.add(HomePageModel(0,sliderIconList))
+        mutableListOfHomePageModel.add(HomePageModel(1,R.drawable.stripe_ad,"#000000"))
+        var homePageAdapter:HomePageAdapter=HomePageAdapter(mutableListOfHomePageModel)
+        recyclerView.adapter=homePageAdapter
+        //////////////////////////////////
 
         return view
     }
